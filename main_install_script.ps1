@@ -52,10 +52,7 @@ function Install-Chocolatey {
     Path to log file. Default: C:\Temp\config-supermicro.log
 #>
 
-param (
-    [string]$Hostname,
-    [string]$LogPath
-)
+
 
 # Set default values if not provided
 if (-not $Hostname) {
