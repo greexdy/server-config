@@ -77,7 +77,17 @@ function Write-Log {
 # --- Install SNMP ---
 function Install-SNMP {
     Write-Log "Checking SNMP installation..."
-    $snmpInstalled = Get-WindowsCapability -Online | Where-Object Name -like "SNMP.Client*" | Where-Object State -eq "Installed"
+    try {
+        $snmpInstalled = Get-WindowsCapability -Online | Where-Object Name -like "SNMP.Client*" | Where-Object State -eq "Installed"
+    } catch {
+        Write-Log "Get-WindowsCapability failed: $_" "ERROR"
+        if ($_.Exception.Message -like '*0x800f0800*') {
+            Write-Log "Windows component store may be corrupted. Please run the following commands in an elevated PowerShell window:" "ERROR"
+            Write-Log "DISM /Online /Cleanup-Image /RestoreHealth" "ERROR"
+            Write-Log "sfc /scannow" "ERROR"
+        }
+        return
+    }
     if ($snmpInstalled) {
         Write-Log "SNMP is already installed."
     } else {
