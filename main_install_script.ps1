@@ -145,6 +145,7 @@ function Configure-Firewall {
             if (-not $icmpv6Rule) {
                 New-NetFirewallRule -DisplayName "Allow Inbound ICMPv6 Echo Request" -Protocol ICMPv6 -IcmpType 128 -Enabled True -Profile Any -Action Allow
                 Write-Log "ICMPv6 firewall rule added."
+          
             } elseif ($icmpv6Rule.Enabled -ne "True") {
                 Set-NetFirewallRule -DisplayName "Allow Inbound ICMPv6 Echo Request" -Enabled True
                 Write-Log "ICMPv6 firewall rule enabled."
@@ -165,7 +166,7 @@ Set-Firewall
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
 # --- Run app-install-script.ps1 ---
-$appInstallScript = Join-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -ChildPath "\APPS\app-install-script.ps1"
+$appInstallScript = Join-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -ChildPath ".\APPS\app-install-script.ps1"
 if (Test-Path $appInstallScript) {
     Write-Log "Starting application package installations from app-install-script.ps1..."
     try {
@@ -177,3 +178,21 @@ if (Test-Path $appInstallScript) {
 } else {
     Write-Log "app-install-script.ps1 not found. Skipping application package installations." "WARN"
 }
+# --- Run and install .exe files in APPS\EXE_FILES ---
+$exeFolder = Join-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -ChildPath ".\APPS\EXE_FILES"
+if (Test-Path $exeFolder) {
+    $exeFiles = Get-ChildItem -Path $exeFolder -Filter *.exe
+    foreach ($exe in $exeFiles) {
+        Write-Log "Found installer: $($exe.Name). Attempting to run silently..."
+        try {
+            # Try common silent install switches
+            Start-Process -FilePath $exe.FullName -ArgumentList "/S", "/silent", "/qn", "/quiet" -Wait
+            Write-Log "$($exe.Name) installation attempted."
+        } catch {
+            Write-Log "ERROR: Failed to run $($exe.Name): $_"
+        }
+    }
+} else {
+    Write-Log "INFO: No EXE installers folder found. Skipping .exe installations."
+}
+# ...existing code...
