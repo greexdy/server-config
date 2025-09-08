@@ -1,31 +1,31 @@
 # 🛠️ PowerShell App Installer
 
-This PowerShell script automates the installation of commonly used applications on Windows using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and chocolatey. Perfect for setting up a new machine or streamlining your workflow.
+This PowerShell script automates the installation of commonly used applications on Windows using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and [Chocolatey](https://chocolatey.org/). It's perfect for setting up a new machine or streamlining your workflow.
 
 ## 📦 Included Apps
 
-- Google Chrome    
-- [uniget](https://github.com/marticliment/UniGetUI)
+- Google Chrome  
+- [UniGetUI](https://github.com/marticliment/UniGetUI)  
 - VLC Media Player  
-- 7zip  
-- Notepad++
-- teamviewer-host
-- advanced IP scanner
+- 7-Zip  
+- Notepad++  
+- TeamViewer Host  
+- Advanced IP Scanner
 
 ## 🚀 How to Use
 
-### 1.
-place your .EXE files into the EXE_FILES folder that are not avaible via winget or chocolatey.
+### 1. Add Custom EXE Files
+Place any .EXE files that are **not available via winget or Chocolatey** into the `EXE_FILES` folder inside `APPS`.
 
-### 2.
+### 2. Open PowerShell and Navigate to the Script Folder
+```powershell
+cd "path\to\server-config"
+```
 
-cd to the directory
-``powershell
-cd ".\your_path_here"
-
-### 3.
-run the code via the following code:
-
+### 3. Run the Installer Script
+Set the execution policy (if needed) and run the main install script:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+./main_install_script.ps1
+```
 .\main_install_script.ps1
