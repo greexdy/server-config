@@ -1,23 +1,25 @@
 # 🛠️ PowerShell App Installer
 
-This PowerShell script automates the installation of commonly used applications on Windows using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/). Perfect for setting up a new machine or streamlining your workflow.
+This PowerShell script automates the installation of commonly used applications on Windows using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and chocolatey. Perfect for setting up a new machine or streamlining your workflow.
 
 ## 📦 Included Apps
 
-- Google Chrome  
-- Mozilla Firefox  
-- Visual Studio Code  
-- Git  
-- Discord  
+- Google Chrome    
+- [uniget](https://github.com/marticliment/UniGetUI)
 - VLC Media Player  
 - 7zip  
 - Notepad++
+- teamviewer-host
+- advanced IP scanner
 
 ## 🚀 How to Use
 
 ### 1.
-Simply run the following code.
+place your .EXE files into the EXE_FILES folder that are not avaible via winget or chocolatey.
+
+###2.
+run the code via the following code:
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-.\install-apps.ps1
+.\main_install_script.ps1
