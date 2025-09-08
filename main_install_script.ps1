@@ -58,7 +58,10 @@ param (
 )
 
 # Set default values if not provided
-if (-not $Hostname) { $Hostname = "MyServer" }
+if (-not $Hostname) {
+    $Hostname = Read-Host "Enter the new hostname for this computer"
+    if (-not $Hostname) { $Hostname = "MyServer" }
+}
 if (-not $LogPath) { $LogPath = "C:\Temp\config-supermicro.log" }
 
 # Ensure log directory exists
@@ -72,37 +75,19 @@ function Write-Log {
     Write-Host $line
     Add-Content -Path $LogPath -Value $line
 }
-
-# --- Install SNMP ---
+# Installing SNMP
 function Install-SNMP {
-    Write-Log "Checking SNMP installation..."
-    try {
-        $snmpInstalled = Get-WindowsCapability -Online | Where-Object Name -like "SNMP.Client*" | Where-Object State -eq "Installed"
-    } catch {
-        Write-Log "Get-WindowsCapability failed: $_" "ERROR"
-        if ($_.Exception.Message -like '*0x800f0800*') {
-            Write-Log "Windows component store may be corrupted. Please run the following commands in an elevated PowerShell window:" "ERROR"
-            Write-Log "DISM /Online /Cleanup-Image /RestoreHealth" "ERROR"
-            Write-Log "sfc /scannow" "ERROR"
-        }
-        return
-    }
-    if ($snmpInstalled) {
-        Write-Log "SNMP is already installed."
+    Write-Host "SNMP feature installeren..."
+    if (Add-WindowsCapability -Online -Name "SNMP.Client~~~~0.0.1.0") {
+        # For Windows Server
+        Install-WindowsFeature -Name "SNMP" -IncludeManagementTools
     } else {
-        try {
-            Add-WindowsCapability -Online -Name "SNMP.Client~~~~0.0.1.0" -ErrorAction Stop
-            Write-Log "SNMP installed successfully."
-        } catch {
-            try {
-                Install-WindowsFeature -Name "SNMP" -IncludeManagementTools -ErrorAction Stop
-                Write-Log "SNMP installed successfully (Server method)."
-            } catch {
-                Write-Log "SNMP installation failed: $_" "ERROR"
-            }
-        }
+        # For Windows 10/11
+        Add-WindowsCapability -Online -Name "SNMP.Client~~~~0.0.1.0"
     }
+    Write-Host "SNMP feature is geïnstalleerd."
 }
+
 
 # --- Change Hostname ---
 function Set-Hostname {
