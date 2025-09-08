@@ -2,17 +2,25 @@ Clear-Host
 Write-Host ""
 Write-Host "========================================================"
 Write-Host ""
-Write-Host "        __  __      _ ______     __  __  ______" -ForegroundColor Cyan
-Write-Host "       / / / /___  (_) ____/__  / /_/ / / /  _/" -ForegroundColor Cyan
-Write-Host "      / / / / __ \/ / / __/ _ \/ __/ / / // /" -ForegroundColor Cyan
-Write-Host "     / /_/ / / / / / /_/ /  __/ /_/ /_/ // /" -ForegroundColor Cyan
-Write-Host "     \____/_/ /_/_/\____/\___/\__/\____/___/" -ForegroundColor Cyan
-Write-Host "          UniGetUI Package Installer Script" 
-Write-Host "        Created with UniGetUI Version 3.3.3"
+Write-Host ""
+Write-Host ""
+Write-Host '      ____   _   _   ___  ' -ForegroundColor Red
+Write-Host '     | ___ \_   _/  ___|  ' -ForegroundColor Red
+Write-Host '     | |_/ / | | \ `--.   ' -ForegroundColor Red
+Write-Host '     |    /  | |  `--. \  ' -ForegroundColor Red
+Write-Host '     | |\ \  | | /\__/ /  ' -ForegroundColor Red
+Write-Host '     \_| \_| \_/ \____/    ' -ForegroundColor Red
+Write-Host ""
+Write-Host '     RTS Package Installer Script V1.0' -ForegroundColor Red
+Write-Host '     Created by Brecht Bondue ' -ForegroundColor Red
+Write-Host ""
+Write-Host ""
+Write-Host ""
+Write-Host 'NOTES:' -ForegroundColor blue
 Write-Host ""
 Write-Host "========================================================"
 Write-Host ""
-Write-Host "NOTES:" -ForegroundColor Yellow
+Write-Host "NOTES:" -ForegroundColor blue
 Write-Host "  - The install process will not be as reliable as importing a bundle with UniGetUI. Expect issues and errors." -ForegroundColor Yellow
 Write-Host "  - Packages will be installed with the install options specified at the time of creation of this script." -ForegroundColor Yellow
 Write-Host "  - Error/Sucess detection may not be 100% accurate." -ForegroundColor Yellow

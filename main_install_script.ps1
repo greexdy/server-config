@@ -1,4 +1,21 @@
-# --- Install Chocolatey using winget ---
+Clear-Host
+Write-Host ""
+Write-Host "========================================================"
+Write-Host ""
+Write-Host ""
+Write-Host ""
+Write-Host '      ____   _   _   ___  ' -ForegroundColor Red
+Write-Host '     | ___ \_   _/  ___|  ' -ForegroundColor Red
+Write-Host '     | |_/ / | | \ `--.   ' -ForegroundColor Red
+Write-Host '     |    /  | |  `--. \  ' -ForegroundColor Red
+Write-Host '     | |\ \  | | /\__/ /  ' -ForegroundColor Red
+Write-Host '     \_| \_| \_/ \____/    ' -ForegroundColor Red
+Write-Host ""
+Write-Host '     RTS Package Installer Script V1.0' -ForegroundColor Red
+Write-Host '     Created by Brecht Bondue ' -ForegroundColor Red
+Write-Host ""
+Write-Host ""
+Write-Host ""
 function Install-Chocolatey {
     try {
         $choco = Get-Command choco.exe -ErrorAction SilentlyContinue
@@ -162,7 +179,7 @@ Install-SNMP
 Get-WindowsProductKey
 Set-Hostname -NewName $Hostname
 Enable-RDP
-Set-Firewall
+Configure-Firewall
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
 # --- Run app-install-script.ps1 ---
