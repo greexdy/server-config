@@ -16,6 +16,11 @@ Write-Host '     Created by Brecht Bondue ' -ForegroundColor Red
 Write-Host ""
 Write-Host ""
 Write-Host ""
+Write-Host 'NOTES:' -ForegroundColor blue
+Write-Host ""
+Write-Host "========================================================"
+Write-Host ""
+Write-Host "NOTES:" -ForegroundColor blue
 function Install-Chocolatey {
     try {
         $choco = Get-Command choco.exe -ErrorAction SilentlyContinue
