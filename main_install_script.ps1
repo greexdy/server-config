@@ -40,7 +40,6 @@ function Install-Chocolatey {
 
 .DESCRIPTION
     - Installs SNMP if not installed
-    - Retrieves Windows product key
     - Renames computer (requires reboot)
     - Enables RDP
     - Configures firewall rules (RDP + ICMP)
@@ -102,20 +101,6 @@ function Install-SNMP {
                 Write-Log "SNMP installation failed: $_" "ERROR"
             }
         }
-    }
-}
-
-# --- Get Windows Product Key ---
-function Get-WindowsProductKey {
-    try {
-        $key = (Get-CimInstance -ClassName SoftwareLicensingService).OA3xOriginalProductKey
-        if ($key) {
-            Write-Log "Windows Product Key: $key"
-        } else {
-            Write-Log "Windows Product Key not found." "WARN"
-        }
-    } catch {
-        Write-Log "Error retrieving product key: $_" "ERROR"
     }
 }
 
