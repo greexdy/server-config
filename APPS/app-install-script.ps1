@@ -23,10 +23,12 @@ Write-Host ""
 if ($args[0] -ne "/DisablePausePrompts") { pause }
 Write-Host ""
 Write-Host "This script will attempt to install the following packages:"
+Write-Host "  - UniGetUI (formerly WingetUI) from WinGet"
 Write-Host "  - Google Chrome For Enterprise from Chocolatey"
-Write-Host "  - Chocolatey from WinGet"
-Write-Host "  - Advanced IP Scanner from WinGet"
+Write-Host "  - Teamviewer.host from Chocolatey"
+Write-Host "  - Advanced Ip Scanner from Chocolatey"
 Write-Host "  - Notepadplusplus from Chocolatey"
+Write-Host "  - 7zip from Chocolatey"
 Write-Host ""
 if ($args[0] -ne "/DisablePausePrompts") { pause }
 Clear-Host
@@ -37,9 +39,12 @@ $commands_run=0
 $results=""
 
 $commands= @(
+    'cmd.exe /C winget.exe install --id "MartiCliment.UniGetUI" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
     'cmd.exe /C choco.exe install google-chrome-for-enterprise -y --no-progress',
-    'cmd.exe /C winget.exe install --id "Famatech.AdvancedIPScanner" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
-    'cmd.exe /C choco.exe install notepadplusplus -y --no-progress'
+    'cmd.exe /C choco.exe install teamviewer.host -y --no-progress',
+    'cmd.exe /C choco.exe install advanced-ip-scanner -y --no-progress',
+    'cmd.exe /C choco.exe install notepadplusplus -y --no-progress',
+    'cmd.exe /C choco.exe install 7zip -y --no-progress'
 )
 
 foreach ($command in $commands) {
