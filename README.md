@@ -18,12 +18,11 @@ This PowerShell script automates the installation of commonly used applications 
 place your .EXE files into the EXE_FILES folder that are not avaible via winget or chocolatey.
 
 ### 2.
-cd to the directory
 
-(
-```powershell
+cd to the directory
+``powershell
 cd ".\your_path_here"
-)
+
 ### 3.
 run the code via the following code:
 
