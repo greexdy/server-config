@@ -165,7 +165,7 @@ Configure-Firewall
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
 # --- Run app-install-script.ps1 ---
-$appInstallScript = Join-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -ChildPath "app-install-script.ps1"
+$appInstallScript = Join-Path -Path (Split-Path -Parent $MyInvocation.MyCommand.Path) -ChildPath "C:\Users\brecht\OneDrive - RTS Bvba\Documenten\powershellscript-pcinstall\APPS\app-install-script.ps1"
 if (Test-Path $appInstallScript) {
     Write-Log "Starting application package installations from app-install-script.ps1..."
     try {
