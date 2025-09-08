@@ -20,7 +20,8 @@ place your .EXE files into the EXE_FILES folder that are not avaible via winget 
 ### 2.
 cd to the directory
 
-(```powershell
+(
+```powershell
 cd ".\your_path_here"
 )
 ### 3.
