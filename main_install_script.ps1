@@ -161,7 +161,7 @@ Install-SNMP
 Get-WindowsProductKey
 Set-Hostname -NewName $Hostname
 Enable-RDP
-Configure-Firewall
+Set-Firewall
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
 # --- Run app-install-script.ps1 ---
