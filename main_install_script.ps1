@@ -1,3 +1,42 @@
+# --- Disable Sleep Mode ---
+function Disable-SleepMode {
+    try {
+        powercfg -change -standby-timeout-ac 0
+        powercfg -change -standby-timeout-dc 0
+        powercfg -change -monitor-timeout-ac 0
+        powercfg -change -monitor-timeout-dc 0
+        Write-Host "Sleep mode and monitor timeout disabled."
+    } catch {
+        Write-Host "Error disabling sleep mode: $_" -ForegroundColor Red
+    }
+}
+
+# --- Set Desktop Background ---
+function Set-DesktopBackground {
+    param (
+        [string]$ImagePath
+    )
+    try {
+        if (-not (Test-Path $ImagePath)) {
+            Write-Host "Background image file not found: $ImagePath" -ForegroundColor Red
+            return
+        }
+        Add-Type @"
+using System.Runtime.InteropServices;
+public class Wallpaper {
+    [DllImport("user32.dll", SetLastError = true)]
+    public static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+}
+"@
+        $SPI_SETDESKWALLPAPER = 0x0014
+        $SPIF_UPDATEINIFILE = 0x01
+        $SPIF_SENDWININICHANGE = 0x02
+        [Wallpaper]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $ImagePath, $SPIF_UPDATEINIFILE -bor $SPIF_SENDWININICHANGE) | Out-Null
+        Write-Host "Desktop background set to $ImagePath."
+    } catch {
+        Write-Host "Error setting desktop background: $_" -ForegroundColor Red
+    }
+}
 Clear-Host
 Write-Host ""
 Write-Host "========================================================"
@@ -162,6 +201,10 @@ Get-WindowsProductKey
 Set-Hostname -NewName $Hostname
 Enable-RDP
 Configure-Firewall
+Disable-SleepMode
+# Set desktop background (update the path as needed)
+# Example: $backgroundPath = "C:\Path\To\Your\Image.jpg"
+# Set-DesktopBackground -ImagePath $backgroundPath
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
 # --- Run app-install-script.ps1 ---
