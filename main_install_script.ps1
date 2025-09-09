@@ -203,7 +203,7 @@ Enable-RDP
 Configure-Firewall
 Disable-SleepMode
 # Set desktop background (update the path as needed)
-# Example: $backgroundPath = "C:\Path\To\Your\Image.jpg"
+$backgroundPath = "./images/RTS_Wallpaper.jpg"
 # Set-DesktopBackground -ImagePath $backgroundPath
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
