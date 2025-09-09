@@ -1,3 +1,38 @@
+# --- Set Only Dutch (Belgian) - Period Language and Keyboard ---
+function Set-DutchBelgianLanguageOnly {
+    try {
+        $desiredLang = "nl-BE"
+        $desiredLayout = "0001080c" # Belgian (Period)
+
+        # Add Dutch (Belgian) if not present
+        $langs = Get-WinUserLanguageList
+        if ($langs.LanguageTag -notcontains $desiredLang) {
+            $langs.Add($desiredLang)
+            Set-WinUserLanguageList $langs -Force
+        }
+
+        # Set as display, input, and region
+        Set-WinUILanguageOverride -Language $desiredLang
+        Set-WinUserLanguageList $desiredLang -Force
+        Set-WinSystemLocale $desiredLang
+        Set-Culture $desiredLang
+        Set-WinHomeLocation -GeoId 21 # Belgium
+
+        # Set keyboard layout to Belgian (Period)
+        $regPath = "HKCU:\Keyboard Layout\Preload"
+        Remove-Item -Path $regPath -Recurse -Force -ErrorAction SilentlyContinue
+        New-Item -Path $regPath -Force | Out-Null
+        Set-ItemProperty -Path $regPath -Name 1 -Value $desiredLayout
+
+        # Remove all other languages
+        $langs = Get-WinUserLanguageList | Where-Object { $_.LanguageTag -eq $desiredLang }
+        Set-WinUserLanguageList $langs -Force
+
+        Write-Host "Set language and keyboard to Dutch (Belgian) - Period only."
+    } catch {
+        Write-Host "Error setting language/keyboard: $_" -ForegroundColor Red
+    }
+}
 # --- Disable Sleep Mode ---
 function Disable-SleepMode {
     try {
@@ -201,6 +236,8 @@ Get-WindowsProductKey
 Set-Hostname -NewName $Hostname
 Enable-RDP
 Configure-Firewall
+# Set language and keyboard to Dutch (Belgian) - Period only
+Set-DutchBelgianLanguageOnly
 Disable-SleepMode
 # Set desktop background (update the path as needed)
 $backgroundPath = "./images/RTS_Wallpaper.jpg"
