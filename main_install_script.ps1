@@ -54,7 +54,7 @@ function Install-Chocolatey {
     New hostname for the computer.
 
 .PARAMETER LogPath
-    Path to log file. Default: C:\Temp\config-supermicro.log
+    Path to log file. Default: C:\Temp\config-server.log
 #>
 
 
@@ -64,7 +64,7 @@ if (-not $Hostname) {
     $Hostname = Read-Host "Enter the new hostname for this computer"
     if (-not $Hostname) { $Hostname = "MyServer" }
 }
-if (-not $LogPath) { $LogPath = "C:\Temp\config-supermicro.log" }
+if (-not $LogPath) { $LogPath = "C:\Temp\config-server.log" }
 
 # Ensure log directory exists
 $logDir = Split-Path $LogPath
