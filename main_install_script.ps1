@@ -1,3 +1,29 @@
+
+Clear-Host
+Write-Host ""
+Write-Host "========================================================"
+Write-Host ""
+Write-Host ""
+Write-Host ""
+Write-Host '      ____   _   _   ___  ' -ForegroundColor Red
+Write-Host '     | ___ \_   _/  ___|  ' -ForegroundColor Red
+Write-Host '     | |_/ / | | \ `--.   ' -ForegroundColor Red
+Write-Host '     |    /  | |  `--. \  ' -ForegroundColor Red
+Write-Host '     | |\ \  | | /\__/ /  ' -ForegroundColor Red
+Write-Host '     \_| \_| \_/ \____/    ' -ForegroundColor Red
+Write-Host ""
+Write-Host '     RTS Package Installer Script V1.0' -ForegroundColor Red
+Write-Host '     Created by Brecht Bondue ' -ForegroundColor Red
+Write-Host ""
+Write-Host ""
+Write-Host ""
+Write-Host 'NOTES:' -ForegroundColor blue
+Write-Host ""
+Write-Host "========================================================"
+Write-Host ""
+Write-Host "NOTES:" -ForegroundColor blue
+
+
 # --- Set Only Dutch (Belgian) - Period Language and Keyboard ---
 function Set-DutchBelgianLanguageOnly {
     try {
@@ -72,29 +98,6 @@ public class Wallpaper {
         Write-Host "Error setting desktop background: $_" -ForegroundColor Red
     }
 }
-Clear-Host
-Write-Host ""
-Write-Host "========================================================"
-Write-Host ""
-Write-Host ""
-Write-Host ""
-Write-Host '      ____   _   _   ___  ' -ForegroundColor Red
-Write-Host '     | ___ \_   _/  ___|  ' -ForegroundColor Red
-Write-Host '     | |_/ / | | \ `--.   ' -ForegroundColor Red
-Write-Host '     |    /  | |  `--. \  ' -ForegroundColor Red
-Write-Host '     | |\ \  | | /\__/ /  ' -ForegroundColor Red
-Write-Host '     \_| \_| \_/ \____/    ' -ForegroundColor Red
-Write-Host ""
-Write-Host '     RTS Package Installer Script V1.0' -ForegroundColor Red
-Write-Host '     Created by Brecht Bondue ' -ForegroundColor Red
-Write-Host ""
-Write-Host ""
-Write-Host ""
-Write-Host 'NOTES:' -ForegroundColor blue
-Write-Host ""
-Write-Host "========================================================"
-Write-Host ""
-Write-Host "NOTES:" -ForegroundColor blue
 function Install-Chocolatey {
     try {
         $choco = Get-Command choco.exe -ErrorAction SilentlyContinue
@@ -203,7 +206,7 @@ function Enable-RDP {
 }
 
 # --- Configure Firewall (ICMP + RDP) ---
-function Configure-Firewall {
+function Set-Firewall {
     try {
             $icmpv4Rule = Get-NetFirewallRule -DisplayName "Allow Inbound ICMPv4 Echo Request" -ErrorAction SilentlyContinue
             if (-not $icmpv4Rule) {
@@ -235,13 +238,13 @@ Install-SNMP
 Get-WindowsProductKey
 Set-Hostname -NewName $Hostname
 Enable-RDP
-Configure-Firewall
+Set-Firewall
 # Set language and keyboard to Dutch (Belgian) - Period only
 Set-DutchBelgianLanguageOnly
 Disable-SleepMode
 # Set desktop background (update the path as needed)
 $backgroundPath = "./images/RTS_Wallpaper.jpg"
-# Set-DesktopBackground -ImagePath $backgroundPath
+Set-DesktopBackground -ImagePath $backgroundPath
 Write-Log "===== Configuration complete. Reboot recommended. ====="
 
 # --- Run app-install-script.ps1 ---
