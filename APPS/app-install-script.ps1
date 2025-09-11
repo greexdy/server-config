@@ -51,8 +51,8 @@ $commands= @(
     'cmd.exe /C winget.exe install --id "TeamViewer.TeamViewer.Host" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
     'cmd.exe /C winget.exe install --id "Notepad++.Notepad++" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
     'cmd.exe /C winget.exe install --id "Google.Chrome" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
-    'cmd.exe /C winget.exe install --id "7zip.7zip" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force'
-winget.exe install --id "Famatech.AdvancedIPScanner" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force
+    'cmd.exe /C winget.exe install --id "7zip.7zip" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
+    'cmd.exe /C winget.exe install --id "Famatech.AdvancedIPScanner" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force'
 )
 
 
