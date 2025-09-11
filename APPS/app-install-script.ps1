@@ -48,12 +48,13 @@ $results=""
 
 $commands= @(
     'cmd.exe /C winget.exe install --id "MartiCliment.UniGetUI" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
-    'cmd.exe /C choco.exe install google-chrome-for-enterprise -y --no-progress',
-    'cmd.exe /C choco.exe install teamviewer.host -y --no-progress',
-    'cmd.exe /C choco.exe install advanced-ip-scanner -y --no-progress',
-    'cmd.exe /C choco.exe install notepadplusplus -y --no-progress',
-    'cmd.exe /C choco.exe install 7zip -y --no-progress'
+    'cmd.exe /C winget.exe install --id "TeamViewer.TeamViewer.Host" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
+    'cmd.exe /C winget.exe install --id "Notepad++.Notepad++" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
+    'cmd.exe /C winget.exe install --id "Google.Chrome" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force',
+    'cmd.exe /C winget.exe install --id "7zip.7zip" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force'
+winget.exe install --id "Famatech.AdvancedIPScanner" --exact --source winget --accept-source-agreements --disable-interactivity --silent --accept-package-agreements --force
 )
+
 
 foreach ($command in $commands) {
     Write-Host "Running: $command" -ForegroundColor Yellow
